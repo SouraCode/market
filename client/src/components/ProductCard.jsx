@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Star } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
+import { motion } from 'framer-motion';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
@@ -20,7 +21,14 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="card p-4 group">
+    <motion.div
+      className="card p-4 group"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ y: -5 }}
+      whileTap={{ scale: 0.95 }}
+    >
       <div className="relative mb-4">
         <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
           {product.image ? (
@@ -30,8 +38,8 @@ const ProductCard = ({ product }) => {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-green-100 to-green-200 flex items-center justify-center">
-              <span className="text-green-600 font-bold text-2xl">
+            <div className="w-full h-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
+              <span className="text-primary-600 font-bold text-2xl">
                 {product.name.charAt(0).toUpperCase()}
               </span>
             </div>
@@ -45,7 +53,7 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="space-y-2">
-        <h3 className="font-semibold text-gray-800 line-clamp-2 group-hover:text-green-600 transition-colors">
+        <h3 className="font-semibold text-gray-800 line-clamp-2 group-hover:text-primary-600 transition-colors">
           {product.name}
         </h3>
         
@@ -76,14 +84,14 @@ const ProductCard = ({ product }) => {
           
           <button
             onClick={handleAddToCart}
-            className="flex items-center space-x-1 bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+            className="flex items-center space-x-1 btn-primary px-3 py-2 rounded-lg text-sm font-medium"
           >
             <ShoppingCart className="h-4 w-4" />
             <span>Add</span>
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

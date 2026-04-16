@@ -12,7 +12,7 @@ const sampleProducts = [
     stock: 100,
     unit: 'kg',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Bananas',
@@ -22,7 +22,7 @@ const sampleProducts = [
     stock: 50,
     unit: 'kg',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1574226516831-e1dff420e38e?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1571771019784-3ff35f4f4277?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Oranges',
@@ -32,7 +32,7 @@ const sampleProducts = [
     stock: 50,
     unit: 'kg',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Strawberries',
@@ -42,7 +42,7 @@ const sampleProducts = [
     stock: 500,
     unit: 'g',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1437750769469-3b4b2f3c2f0b?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Grapes',
@@ -52,7 +52,7 @@ const sampleProducts = [
     stock: 30,
     unit: 'kg',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1568801783698-1ec1e6f03d30?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1537640538966-79f36943f303?auto=format&fit=crop&w=800&q=60'
   },
 
   // Vegetables
@@ -64,7 +64,7 @@ const sampleProducts = [
     stock: 80,
     unit: 'kg',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1542444459-db3ed4b5e3a6?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1582515073490-39981397c445?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Broccoli',
@@ -74,7 +74,7 @@ const sampleProducts = [
     stock: 50,
     unit: 'kg',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1617191512170-0b1c5e3e1a9a?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1459411621453-7e7715a9b4e8?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Spinach',
@@ -84,7 +84,7 @@ const sampleProducts = [
     stock: 500,
     unit: 'g',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1542444459-db3ed4b5e3a6?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Tomatoes',
@@ -94,7 +94,7 @@ const sampleProducts = [
     stock: 30,
     unit: 'kg',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1546470427-e9e826f4b5e5?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Bell Peppers',
@@ -104,7 +104,7 @@ const sampleProducts = [
     stock: 20,
     unit: 'kg',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1604908177522-9d3f3e9f8f84?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1561136594-7f6846a1cd25?auto=format&fit=crop&w=800&q=60'
   },
 
   // Dairy
@@ -116,7 +116,7 @@ const sampleProducts = [
     stock: 50,
     unit: 'liter',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1586201375761-83865001e6cb?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Cheddar Cheese',
@@ -126,7 +126,7 @@ const sampleProducts = [
     stock: 500,
     unit: 'g',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1586201375761-83865001e6cb?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Greek Yogurt',
@@ -136,7 +136,7 @@ const sampleProducts = [
     stock: 400,
     unit: 'g',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1569670522687-6d6a1c3b6f5d?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1488477304112-4944851de03d?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Butter',
@@ -146,7 +146,7 @@ const sampleProducts = [
     stock: 500,
     unit: 'g',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1580913428413-3f4f8a8b3cde?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=800&q=60'
   },
 
   // Meat
@@ -158,7 +158,7 @@ const sampleProducts = [
     stock: 40,
     unit: 'kg',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1604908177522-9d3f3e9f8f84?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Ground Beef',
@@ -168,7 +168,7 @@ const sampleProducts = [
     stock: 30,
     unit: 'kg',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1604908177522-9d3f3e9f8f84?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Salmon Fillet',
@@ -178,7 +178,7 @@ const sampleProducts = [
     stock: 20,
     unit: 'kg',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1561047029-3000e8e3d0ad?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=800&q=60'
   },
 
   // Bakery
@@ -190,7 +190,7 @@ const sampleProducts = [
     stock: 20,
     unit: 'loaf',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1542827638-2b12d2f1b7c3?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Croissants',
@@ -200,7 +200,7 @@ const sampleProducts = [
     stock: 24,
     unit: 'pack',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1542827638-2b12d2f1b7c3?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=60'
   },
 
   // Beverages
@@ -212,7 +212,7 @@ const sampleProducts = [
     stock: 40,
     unit: 'liter',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1571164018491-9f0a6e4a2b3e?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Coffee Beans',
@@ -222,7 +222,7 @@ const sampleProducts = [
     stock: 500,
     unit: 'g',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1510627498534-cf7e9002facc?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=800&q=60'
   },
 
   // Snacks
@@ -234,7 +234,7 @@ const sampleProducts = [
     stock: 500,
     unit: 'g',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1604908177522-9d3f3e9f8f84?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Granola Bars',
@@ -244,7 +244,7 @@ const sampleProducts = [
     stock: 25,
     unit: 'pack',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=800&q=60'
   },
 
   // Household
@@ -256,7 +256,7 @@ const sampleProducts = [
     stock: 20,
     unit: 'pack',
     featured: false,
-    image: 'https://images.unsplash.com/photo-1581579182244-5a5c6f4b28b1?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1585435557343-3b092031e21f?auto=format&fit=crop&w=800&q=60'
   },
   {
     name: 'Dish Soap',
@@ -266,7 +266,7 @@ const sampleProducts = [
     stock: 15,
     unit: 'bottle',
     featured: true,
-    image: 'https://images.unsplash.com/photo-1581579182244-5a5c6f4b28b1?auto=format&fit=crop&w=800&q=60'
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=60'
   }
 ];
 

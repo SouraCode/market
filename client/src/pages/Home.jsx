@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Star, ShoppingCart, Truck, Shield, RefreshCw } from 'lucide-react';
+import { motion } from 'framer-motion';
 import ProductCard from '../components/ProductCard';
 
 const Home = () => {
@@ -31,22 +32,22 @@ const Home = () => {
 
   const features = [
     {
-      icon: <Truck className="h-8 w-8 text-green-600" />,
+      icon: <Truck className="h-8 w-8 text-primary-600" />,
       title: "Free Delivery",
       description: "Free delivery on orders over $50"
     },
     {
-      icon: <Shield className="h-8 w-8 text-green-600" />,
+      icon: <Shield className="h-8 w-8 text-primary-600" />,
       title: "Secure Payment",
       description: "100% secure payment processing"
     },
     {
-      icon: <RefreshCw className="h-8 w-8 text-green-600" />,
+      icon: <RefreshCw className="h-8 w-8 text-primary-600" />,
       title: "Easy Returns",
       description: "30-day return policy"
     },
     {
-      icon: <Star className="h-8 w-8 text-green-600" />,
+      icon: <Star className="h-8 w-8 text-primary-600" />,
       title: "Quality Guarantee",
       description: "Fresh products guaranteed"
     }
@@ -55,7 +56,7 @@ const Home = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green-600"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600"></div>
       </div>
     );
   }
@@ -63,41 +64,70 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-600 to-green-700 text-white py-20">
+      <motion.section
+        className="bg-gradient-to-r from-primary-600 to-primary-700 text-white py-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
+          <motion.div
+            className="text-center"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               Fresh Groceries
-              <span className="block text-green-200">Delivered to Your Door</span>
+              <span className="block text-primary-200">Delivered to Your Door</span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-green-100 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl mb-8 text-primary-100 max-w-3xl mx-auto">
               Shop the freshest produce, dairy, meat, and more from local farmers and trusted suppliers. 
               Fast delivery, great prices, and quality you can trust.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
               <Link
                 to="/products"
-                className="bg-white text-green-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg text-lg transition-colors duration-200"
+                className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg text-lg transition-colors duration-200"
               >
                 Shop Now
               </Link>
               <Link
                 to="/products?category=fruits"
-                className="border-2 border-white text-white hover:bg-white hover:text-green-600 font-semibold py-3 px-8 rounded-lg text-lg transition-colors duration-200"
+                className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-3 px-8 rounded-lg text-lg transition-colors duration-200"
               >
                 Browse Fruits
               </Link>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Features Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             {features.map((feature, index) => (
-              <div key={index} className="text-center">
+              <motion.div
+                key={index}
+                className="text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+              >
                 <div className="flex justify-center mb-4">
                   {feature.icon}
                 </div>
@@ -107,9 +137,9 @@ const Home = () => {
                 <p className="text-gray-600">
                   {feature.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -125,26 +155,41 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-            {categories.map((category) => (
-              <Link
+          <motion.div
+            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            {categories.map((category, index) => (
+              <motion.div
                 key={category}
-                to={`/products?category=${category}`}
-                className="group"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <div className="bg-white rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-200 group-hover:scale-105 transform transition-transform">
-                  <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
-                    <span className="text-green-600 font-bold text-lg">
-                      {category.charAt(0).toUpperCase()}
-                    </span>
+                <Link
+                  to={`/products?category=${category}`}
+                  className="group block"
+                >
+                  <div className="bg-white rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-200">
+                    <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-200 transition-colors">
+                      <span className="text-primary-600 font-bold text-lg">
+                        {category.charAt(0).toUpperCase()}
+                      </span>
+                    </div>
+                    <h3 className="font-semibold text-gray-800 capitalize">
+                      {category}
+                    </h3>
                   </div>
-                  <h3 className="font-semibold text-gray-800 capitalize">
-                    {category}
-                  </h3>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -160,11 +205,25 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            {featuredProducts.map((product, index) => (
+              <motion.div
+                key={product._id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <ProductCard product={product} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           
           <div className="text-center mt-12">
             <Link
