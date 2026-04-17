@@ -62,13 +62,15 @@ router.post('/add', verifyToken, async (req, res) => {
       cart.items.push({ product: productId, quantity });
     }
 
-    // Calculate total
+    // Populate product data before calculating total
+    await cart.populate('items.product');
+
+    // Calculate total with populated product data
     cart.total = cart.items.reduce((sum, item) => {
       return sum + (item.product.price * item.quantity);
     }, 0);
 
     await cart.save();
-    await cart.populate('items.product');
 
     res.json(cart);
   } catch (error) {
@@ -93,13 +95,15 @@ router.put('/update/:itemId', verifyToken, async (req, res) => {
 
     item.quantity = quantity;
     
+    // Populate product data before recalculating total
+    await cart.populate('items.product');
+
     // Recalculate total
     cart.total = cart.items.reduce((sum, item) => {
       return sum + (item.product.price * item.quantity);
     }, 0);
 
     await cart.save();
-    await cart.populate('items.product');
 
     res.json(cart);
   } catch (error) {
@@ -118,13 +122,15 @@ router.delete('/remove/:itemId', verifyToken, async (req, res) => {
 
     cart.items.pull(req.params.itemId);
     
+    // Populate product data before recalculating total
+    await cart.populate('items.product');
+
     // Recalculate total
     cart.total = cart.items.reduce((sum, item) => {
       return sum + (item.product.price * item.quantity);
     }, 0);
 
     await cart.save();
-    await cart.populate('items.product');
 
     res.json(cart);
   } catch (error) {

@@ -23,6 +23,8 @@ const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
+  const [showOrderConfirm, setShowOrderConfirm] = useState(false);
+  const [confirmedOrder, setConfirmedOrder] = useState(null);
   const [formData, setFormData] = useState({
     shippingAddress: {
       street: user?.address?.street || '',
@@ -72,13 +74,12 @@ const Checkout = () => {
 
       const response = await axios.post('/api/orders/create', orderData);
       
-      toast.success('Order placed successfully!');
+      setConfirmedOrder(response.data);
+      setShowOrderConfirm(true);
       clearCart();
-      navigate(`/orders/${response.data._id}`);
     } catch (error) {
       toast.error('Failed to place order. Please try again.');
       console.error('Order creation error:', error);
-    } finally {
       setLoading(false);
     }
   };
@@ -117,14 +118,13 @@ const Checkout = () => {
     setLoading(true);
     try {
       const res = await axios.post('/api/payments/upi/confirm', { orderId });
-      toast.success('UPI payment confirmed');
+      setConfirmedOrder(res.data.order);
+      setShowOrderConfirm(true);
       clearCart();
       sessionStorage.removeItem('pendingOrderId');
-      navigate(`/orders/${res.data.order._id}`);
     } catch (error) {
       console.error('UPI confirm error:', error);
       toast.error('Failed to confirm UPI payment');
-    } finally {
       setLoading(false);
     }
   };
@@ -161,9 +161,9 @@ const Checkout = () => {
               razorpay_signature: response.razorpay_signature,
               orderId
             });
-            toast.success('Payment successful');
+            setConfirmedOrder(verifyRes.data.order);
+            setShowOrderConfirm(true);
             clearCart();
-            navigate(`/orders/${verifyRes.data.order._id}`);
           } catch (err) {
             toast.error('Payment verification failed');
             console.error(err);
@@ -557,6 +557,71 @@ const Checkout = () => {
           </div>
         </div>
       </form>
+
+      {/* Order Confirmation Modal */}
+      {showOrderConfirm && confirmedOrder && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-8 animate-in fade-in zoom-in">
+            <div className="text-center">
+              <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                <CheckCircle className="h-8 w-8 text-green-600" />
+              </div>
+              
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Order Placed!</h2>
+              <p className="text-gray-600 mb-6">
+                Your order has been placed successfully
+              </p>
+
+              <div className="bg-gray-50 rounded-lg p-4 mb-6 text-left">
+                <div className="mb-4">
+                  <p className="text-sm text-gray-600">Order ID</p>
+                  <p className="text-lg font-semibold text-gray-900">{confirmedOrder._id}</p>
+                </div>
+                
+                <div className="mb-4">
+                  <p className="text-sm text-gray-600">Order Total</p>
+                  <p className="text-lg font-semibold text-gray-900">
+                    {formatPrice(confirmedOrder.total)}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">Delivery Address</p>
+                  <p className="text-sm text-gray-900 mt-1">
+                    {confirmedOrder.shippingAddress.street},<br />
+                    {confirmedOrder.shippingAddress.city}, {confirmedOrder.shippingAddress.state} {confirmedOrder.shippingAddress.zipCode}
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-sm text-gray-600 mb-6">
+                You will receive a confirmation email shortly with tracking details.
+              </p>
+
+              <div className="space-y-3">
+                <button
+                  onClick={() => {
+                    navigate(`/orders/${confirmedOrder._id}`);
+                  }}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
+                >
+                  View Order Details
+                </button>
+                
+                <button
+                  onClick={() => {
+                    setShowOrderConfirm(false);
+                    navigate('/');
+                  }}
+                  className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
+                >
+                  Continue Shopping
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -23,9 +23,8 @@ const Cart = () => {
     }
   };
 
-  // Always use local cart for now to avoid server errors
-  const currentCartItems = localCart;
-  const currentCartTotal = localCart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
+  const currentCartItems = isAuthenticated ? cart.items : localCart;
+  const currentCartTotal = currentCartItems.reduce((total, item) => total + (item.product.price * item.quantity), 0);
 
   if (currentCartItems.length === 0) {
     return (
@@ -69,8 +68,10 @@ const Cart = () => {
               </div>
 
               <div className="space-y-4">
-                {currentCartItems.map((item) => (
-                  <div key={item.productId} className="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg">
+                {currentCartItems.map((item) => {
+                  const itemId = isAuthenticated ? item._id : item.productId;
+                  return (
+                  <div key={itemId} className="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg">
                     {/* Product Image */}
                     <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
                       {item.product.image ? (
@@ -105,7 +106,7 @@ const Cart = () => {
                     {/* Quantity Controls */}
                     <div className="flex items-center space-x-2">
                       <button
-                        onClick={() => handleQuantityChange(item.productId, item.quantity - 1)}
+                        onClick={() => handleQuantityChange(itemId, item.quantity - 1)}
                         className="p-1 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
                       >
                         <Minus className="h-4 w-4" />
@@ -114,7 +115,7 @@ const Cart = () => {
                         {item.quantity}
                       </span>
                       <button
-                        onClick={() => handleQuantityChange(item.productId, item.quantity + 1)}
+                        onClick={() => handleQuantityChange(itemId, item.quantity + 1)}
                         disabled={item.quantity >= item.product.stock}
                         className="p-1 border border-gray-300 rounded hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
@@ -131,13 +132,13 @@ const Cart = () => {
 
                     {/* Remove Button */}
                     <button
-                      onClick={() => removeFromCart(item.productId)}
+                      onClick={() => removeFromCart(itemId)}
                       className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
-                ))}
+                )})}
               </div>
             </div>
           </div>
