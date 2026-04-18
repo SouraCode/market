@@ -31,6 +31,17 @@ const Orders = () => {
     }
   };
 
+  const handleCancelOrder = async (id) => {
+    if (!window.confirm('Are you sure you want to cancel this order?')) return;
+    try {
+      await axios.put(`/api/orders/${id}/cancel`);
+      setOrders(orders.map(o => o._id === id ? { ...o, status: 'cancelled' } : o));
+    } catch (error) {
+      console.error('Failed to cancel order:', error);
+      alert(error.response?.data?.message || 'Failed to cancel order');
+    }
+  };
+
   const getStatusIcon = (status) => {
     switch (status) {
       case 'pending':
@@ -226,6 +237,14 @@ const Orders = () => {
                     >
                       View Details
                     </button>
+                    {(order.status === 'pending' || order.status === 'processing') && (
+                      <button 
+                        onClick={() => handleCancelOrder(order._id)}
+                        className="text-red-500 hover:text-red-700 font-medium text-sm"
+                      >
+                        Cancel Order
+                      </button>
+                    )}
                     {order.status === 'delivered' && (
                       <button className="text-green-600 hover:text-green-700 font-medium text-sm">
                         Reorder

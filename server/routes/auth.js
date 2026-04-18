@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const User = require('../models/User');
+const Notification = require('../models/Notification');
 const router = express.Router();
 
 // Generate JWT token
@@ -76,6 +77,17 @@ router.post('/login', [
     }
 
     const token = generateToken(user._id);
+
+    // Create a notification if user is not admin
+    if (user.role !== 'admin') {
+      const notification = new Notification({
+        type: 'login',
+        message: `User ${user.email} logged in.`,
+        relatedId: user._id,
+        onModel: 'User'
+      });
+      await notification.save();
+    }
 
     res.json({
       message: 'Login successful',

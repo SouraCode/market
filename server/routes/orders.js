@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const Order = require('../models/Order');
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
+const Notification = require('../models/Notification');
 const router = express.Router();
 
 // Middleware to verify token
@@ -64,6 +65,18 @@ router.post('/create', verifyToken, async (req, res) => {
     cart.total = 0;
     await cart.save();
 
+    // Create notification for admin
+    // Get user details
+    const User = require('../models/User');
+    const user = await User.findById(req.userId);
+    const notification = new Notification({
+      type: 'order',
+      message: `New order placed by ${user ? user.email : 'a user'} for $${order.total}.`,
+      relatedId: order._id,
+      onModel: 'Order'
+    });
+    await notification.save();
+
     res.status(201).json(order);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
@@ -116,6 +129,31 @@ router.put('/:id/status', verifyToken, async (req, res) => {
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
+
+    res.json(order);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Cancel order (Customer)
+router.put('/:id/cancel', verifyToken, async (req, res) => {
+  try {
+    const order = await Order.findOne({ 
+      _id: req.params.id, 
+      user: req.userId 
+    });
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    if (!['pending', 'processing'].includes(order.status)) {
+      return res.status(400).json({ message: 'Order cannot be cancelled at this stage' });
+    }
+
+    order.status = 'cancelled';
+    await order.save();
 
     res.json(order);
   } catch (error) {
