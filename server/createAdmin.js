@@ -6,8 +6,11 @@ const createAdmin = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/grocery-market');
 
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'adminpassword123';
+
     // Check if admin exists
-    const adminExists = await User.findOne({ email: 'roymahapatrauttam@gmail.com' });
+    const adminExists = await User.findOne({ email: adminEmail });
     if (adminExists) {
       console.log('Admin already exists');
       // Update password just in case or make sure role is admin
@@ -17,8 +20,8 @@ const createAdmin = async () => {
     } else {
       const admin = new User({
         name: 'Soura Roy Mahapatra',
-        email: 'roymahapatrauttam@gmail.com',
-        password: 'soura123',
+        email: adminEmail,
+        password: adminPassword,
         role: 'admin'
       });
       await admin.save();
