@@ -18,6 +18,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Disclaimer from './pages/Disclaimer';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
+import OrderDetails from './pages/OrderDetails';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/orders" element={<Orders />} />
+              <Route path="/orders/:id" element={<OrderDetails />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/return-policy" element={<ReturnPolicy />} />
               <Route path="/refund-policy" element={<RefundPolicy />} />
